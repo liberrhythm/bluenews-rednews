@@ -10,6 +10,7 @@ defmodule SimilarArticleRetrieval.Application do
     children = [
       # Starts a worker by calling: SimilarArticleRetrieval.Worker.start_link(arg)
       # {SimilarArticleRetrieval.Worker, arg},
+      {SimilarArticleRetrieval.NewsRetriever}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
