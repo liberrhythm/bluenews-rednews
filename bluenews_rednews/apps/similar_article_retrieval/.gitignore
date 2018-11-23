@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 similar_article_retrieval-*.tar
 
+# Ignore all secret files containing secrets and keys
+*.secret.exs
