@@ -22,25 +22,50 @@ defmodule SimilarArticleRetrieval.Impl do
 
   @default_news_srcs Enum.concat(@news_sources.liberal, @news_sources.conservative)
 
+  # PRIMARY RETRIEVAL FUNCTIONS
+
   def get_all_sources() do
     HTTPoison.get!(@base_url <> "/sources", [], params: [{"apiKey", @newsapi_key}]).body
     |> Poison.decode!()
   end
 
-  def process_keywords(keywords) do
-    Enum.join(keywords, " OR ")
+  def get_all_articles(keywords) do
+    retrieve_articles(@default_news_srcs, process_keywords(keywords))
+    |> filter_articles()
+    |> classify_articles()
   end
 
-  def encode_params(keywords, source) do
-    params = %{
-      q: process_keywords(keywords),
-      sources: source,
-      sortBy: "relevancy",
-      apiKey: @newsapi_key
-    }
+  # RETRIEVAL, FILTER, CLASSIFY FUNCTIONS
+  # TO DO: handle no results back or error from News API
 
-    URI.encode_query(params)
+  def retrieve_article(keywords, source) do
+    HTTPoison.get!(@base_url <> "/everything", [], params: config_params(keywords, source)).body
+    |> Poison.decode!()
   end
+
+  def retrieve_articles(sources, keywords) do
+    sources
+    |> Enum.map(fn src ->
+      Task.async(fn -> SimilarArticleRetrieval.Impl.retrieve_article(keywords, src) end)
+    end)
+    |> Enum.map(fn work ->
+      Task.await(work)
+    end)
+  end
+
+  def filter_articles(results) do
+    results
+    |> Enum.map(fn result -> Enum.at(result["articles"], 0) end)
+  end
+
+  def classify_articles(articles) do
+    articles
+    |> Enum.map(fn article ->
+      Map.put(article, "bias", identify_src_bias(article["source"]["id"]))
+    end)
+  end
+
+  # NEWS API HELPER FUNCTIONS
 
   def config_params(keywords, source) do
     %{
@@ -51,7 +76,8 @@ defmodule SimilarArticleRetrieval.Impl do
     }
   end
 
-  # use fetch value or have key?
+  # CLASSIFICATION HELPER FUNCTIONS
+
   def is_liberal(src) do
     Enum.member?(@news_sources.liberal, src)
   end
@@ -64,8 +90,8 @@ defmodule SimilarArticleRetrieval.Impl do
     Enum.member?(@news_sources.non_partisan, src)
   end
 
-  def print_news_sources(src) do
-    @news_sources.liberal
+  def process_keywords(keywords) do
+    Enum.join(keywords, " OR ")
   end
 
   def identify_src_bias(src) do
@@ -77,25 +103,12 @@ defmodule SimilarArticleRetrieval.Impl do
     end
   end
 
-  def retrieve_article(keywords, source) do
-    HTTPoison.get!(@base_url <> "/everything", [], params: config_params(keywords, source)).body
-    |> Poison.decode!()
-  end
-
-  def get_all_articles(keywords) do
-    retrieve_articles(@default_news_srcs, process_keywords(keywords))
-    |> filter_articles()
-    |> classify_articles()
-  end
+  # TESTING PURPOSES
 
   def get_one_article() do
     retrieve_articles(["the-hill"], process_keywords(["bitcoin"]))
     |> filter_articles()
     |> classify_articles()
-  end
-
-  def print() do
-    @default_news_srcs
   end
 
   def get_two_articles() do
@@ -104,35 +117,4 @@ defmodule SimilarArticleRetrieval.Impl do
     |> classify_articles()
   end
 
-  # def get_articles(:liberal, keywords) do
-  #   retrieve_articles(Map.values(@news_sources.liberal), keywords)
-  # end
-
-  # def get_articles(:conservative, keywords) do
-  #   retrieve_articles(Map.values(@news_sources.conservative), keywords)
-  # end
-
-  def retrieve_articles(sources, keywords) do
-    sources
-    |> Enum.map(fn src ->
-      Task.async(fn -> SimilarArticleRetrieval.Impl.retrieve_article(keywords, src) end)
-    end)
-    |> Enum.map(fn work ->
-      Task.await(work)
-    end)
-    # |> Enum.concat()
-  end
-
-  # need to handle no results back
-  def filter_articles(results) do
-    results
-    |> Enum.map(fn result -> Enum.at(result["articles"], 0) end)
-  end
-
-  def classify_articles(articles) do
-    articles
-    |> Enum.map(fn article ->
-      Map.put(article, "bias", identify_src_bias(article["source"]["name"]))
-    end)
-  end
 end
