@@ -22,6 +22,9 @@ be found at [https://hexdocs.pm/similar_article_retrieval](https://hexdocs.pm/si
 Sources: 
 * http://www.journalism.org/2014/10/21/section-1-media-sources-distinct-favorites-emerge-on-the-left-and-right/
 * http://www.adfontesmedia.com/the-chart-version-3-0-what-exactly-are-we-reading/
+* https://guides.lib.umich.edu/c.php?g=637508&p=4462444
 * https://www.marketwatch.com/story/how-does-your-favorite-news-source-rate-on-the-truthiness-scale-consult-this-chart-2016-12-15
 * https://www.businessinsider.com/what-your-preferred-news-outlet-says-about-your-political-ideology-2014-10
 * https://www.washingtonpost.com/news/the-fix/wp/2014/10/21/the-gop-hates-the-lamestream-media-even-more-than-you-think/?utm_term=.c7acc0aee1f1
+* http://www.journalism.org/2016/02/25/reddit-news-users-more-likely-to-be-male-young-and-digital-in-their-news-preferences/
+* 

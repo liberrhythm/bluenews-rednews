@@ -2,37 +2,70 @@ defmodule SimilarArticleRetrieval.Impl do
   @base_url "https://newsapi.org/v2"
   @newsapi_key Application.get_env(:similar_article_retrieval, :newsapi_key)
 
+  # 28 news source categorized by media bias
   @news_sources %{
     liberal: [
       "the-new-york-times",
       "bbc-news",
       "the-huffington-post",
       "politico",
-      "msnbc"
+      "msnbc",
+      "cnn",
+      "reddit-r-all",
+      "new-york-magazine",
+      "newsweek",
+      "the-washington-post",
+      "vice-news"
     ],
     conservative: [
       "the-american-conservative",
       "fox-news",
       "the-hill",
       "national-review",
-      "the-wall-street-journal"
+      "the-wall-street-journal",
+      "breitbart-news",
+      "the-washington-times"
     ],
-    non_partisan: []
+    non_partisan: [
+      "reuters",
+      "google-news",
+      "axios",
+      "al-jazeera-english",
+      "associated-press",
+      "usa-today",
+      "time",
+      "abc-news",
+      "cbs-news",
+      "nbc-news"
+    ]
   }
 
-  @default_news_srcs Enum.concat(@news_sources.liberal, @news_sources.conservative)
+  # default news sources for initial query search
+  @default_news_srcs [
+    "the-new-york-times",
+    "bbc-news",
+    "the-huffington-post",
+    "politico",
+    "msnbc",
+    "the-american-conservative",
+    "fox-news",
+    "the-hill",
+    "national-review",
+    "the-wall-street-journal"
+  ]
 
   # PRIMARY RETRIEVAL FUNCTIONS
-
-  def get_all_sources() do
-    HTTPoison.get!(@base_url <> "/sources", [], params: [{"apiKey", @newsapi_key}]).body
-    |> Poison.decode!()
-  end
 
   def get_all_articles(keywords) do
     retrieve_articles(@default_news_srcs, process_keywords(keywords))
     |> filter_articles()
     |> classify_articles()
+  end
+
+  def get_all_sources() do
+    retrieve_sources()
+    |> filter_sources()
+    |> classify_sources()
   end
 
   # RETRIEVAL, FILTER, CLASSIFY FUNCTIONS
@@ -65,8 +98,36 @@ defmodule SimilarArticleRetrieval.Impl do
     end)
   end
 
+  def retrieve_sources() do
+    HTTPoison.get!(@base_url <> "/sources", [], params: config_params()).body
+    |> Poison.decode!()
+  end
+
+  def filter_sources(results) do
+    results["sources"]
+    |> Enum.filter(fn source ->
+      source["country"] == "us" && source["category"] == "general" && source["language"] == "en"
+        || source["id"] == "the-wall-street-journal" || source["id"] == "bbc-news"
+    end)
+  end
+
+  def classify_sources(sources) do
+    sources
+    |> Enum.map(fn source ->
+      Map.put(source, "bias", identify_src_bias(source["id"]))
+    end)
+  end
+
   # NEWS API HELPER FUNCTIONS
 
+  # params for getting sources
+  def config_params() do
+    %{
+      apiKey: @newsapi_key
+    }
+  end
+
+  # params for getting articles based on keyword and source
   def config_params(keywords, source) do
     %{
       q: keywords,
@@ -103,7 +164,7 @@ defmodule SimilarArticleRetrieval.Impl do
     end
   end
 
-  # TESTING PURPOSES
+  # FOR TESTING PURPOSES
 
   def get_one_article() do
     retrieve_articles(["the-hill"], process_keywords(["bitcoin"]))
