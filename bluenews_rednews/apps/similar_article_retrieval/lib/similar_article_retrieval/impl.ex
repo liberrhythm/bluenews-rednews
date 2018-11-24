@@ -17,12 +17,10 @@ defmodule SimilarArticleRetrieval.Impl do
       "national-review",
       "the-wall-street-journal"
     ],
-    non_partisan: %{
-
-    }
+    non_partisan: []
   }
 
-  @default_news_srcs Map.values(Map.merge(@news_sources.liberal, @news_sources.conservative))
+  @default_news_srcs Enum.concat(@news_sources.liberal, @news_sources.conservative)
 
   def get_all_sources() do
     HTTPoison.get!(@base_url <> "/sources", [], params: [{"apiKey", @newsapi_key}]).body
@@ -55,15 +53,15 @@ defmodule SimilarArticleRetrieval.Impl do
 
   # use fetch value or have key?
   def is_liberal(src) do
-    Map.has_key?(@news_sources.liberal, src)
+    Enum.member?(@news_sources.liberal, src)
   end
 
   def is_conservative(src) do
-    Map.has_key?(@news_sources.conservative, src)
+    Enum.member?(@news_sources.conservative, src)
   end
 
   def is_non_partisan(src) do
-    Map.has_key?(@news_sources.non_partisan, src)
+    Enum.member?(@news_sources.non_partisan, src)
   end
 
   def print_news_sources(src) do
@@ -82,7 +80,6 @@ defmodule SimilarArticleRetrieval.Impl do
   def retrieve_article(keywords, source) do
     HTTPoison.get!(@base_url <> "/everything", [], params: config_params(keywords, source)).body
     |> Poison.decode!()
-    # |> Map.new()
   end
 
   def get_all_articles(keywords) do
