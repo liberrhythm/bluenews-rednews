@@ -1,1 +1,56 @@
 /* This file is for your main application css. */
+.liberal {
+    color: #0385AB;
+}
+
+.conservative {
+    color: #C91305;
+}
+
+.non-partisan {
+    color: rgb(58, 57, 57);
+}
+
+.liberal-container {
+    background-color: #0385AB !important;
+    color: white !important;
+}
+
+.conservative-container {
+    background-color: #C91305 !important;
+    color: white !important;
+}
+
+.non-partisan-container {
+    background-color: rgb(40, 40, 40) !important;
+    color: white !important;
+}
+
+.pill {
+    background-color: white;
+    color: rgb(58, 57, 57);
+    border: 1px solid rgb(58, 57, 57) !important;
+    border-radius: 20px !important;
+    margin: 3px;
+}
+
+.pill:hover {
+    background-color: rgb(58, 57, 57);
+    color: white !important;
+}
+
+#news-feed {
+    margin: 3rem 3rem 3rem 3rem;
+}
+
+.nav {
+    margin-top: 0;
+}
+
+a {
+    color: rgb(58, 57, 57) !important;
+}
+
+#search-by-keyword, #other-sources {
+    margin-top: 1rem;
+}

@@ -12,14 +12,21 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="">
       <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <h1><span class="liberal">Blue</span> News, <span class="conservative">Red</span> News</h1>
+              <h5>See <span class="liberal">Liberal</span> News and <span class="conservative">Conservative</span> News, Side by Side</h5>
+              <nav role="navigation" class="text-center">
+                <ul class="nav nav-pills" style="display: inline-block">
+                  <li><a href="http://www.phoenixframework.org/docs">About</a></li>
+                  <li><a href="http://www.phoenixframework.org/docs">Methodology</a></li>
+                  <li><a href="http://www.phoenixframework.org/docs">Author</a></li>
+                </ul>
+              </nav>
+            </div>
+        </div>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
