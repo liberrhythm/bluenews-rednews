@@ -56,3 +56,4 @@
 </div>
 
 <!-- <%= gettext "Welcome to %{name}!", name: "Phoenix" %> -->
+<!-- <%= c :article %> -->

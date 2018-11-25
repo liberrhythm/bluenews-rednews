@@ -5,6 +5,8 @@
               {description,"newsfeed"},
               {modules,['Elixir.Newsfeed','Elixir.Newsfeed.Application',
                         'Elixir.NewsfeedWeb','Elixir.NewsfeedWeb.ChannelCase',
+                        'Elixir.NewsfeedWeb.Components.ArticleView',
+                        'Elixir.NewsfeedWeb.Components.ComponentHelpers',
                         'Elixir.NewsfeedWeb.ConnCase',
                         'Elixir.NewsfeedWeb.Endpoint',
                         'Elixir.NewsfeedWeb.ErrorHelpers',
