@@ -37,23 +37,27 @@
 <div id="news-feed" class="row">
   <div class="col-sm-6 liberal-container">
     <h3>Liberal</h3>
+    <%= c :article %>
   </div>
   <div class="col-sm-6 conservative-container">
     <h3>Conservative</h3>
+    <%= c :article %>
   </div>
 </div>
 
 <div id="news-feed" class="row">
   <div class="col-sm-4 liberal-container">
     <h3>Liberal</h3>
+    <%= c :article %>
   </div>
   <div class="col-sm-4 non-partisan-container">
     <h3>Non-Partisan</h3>
+    <%= c :article %>
   </div>
   <div class="col-sm-4 conservative-container">
     <h3>Conservative</h3>
+    <%= c :article %>
   </div>
 </div>
 
 <!-- <%= gettext "Welcome to %{name}!", name: "Phoenix" %> -->
-<!-- <%= c :article %> -->

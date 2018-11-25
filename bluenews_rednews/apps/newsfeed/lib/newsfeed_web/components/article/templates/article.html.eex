@@ -1,5 +1,0 @@
-<div id="article" class="container">
-  <h4>this is an article!</h4>
-</div>
-
-<!-- <%= gettext "Welcome to %{name}!", name: "Phoenix" %> -->

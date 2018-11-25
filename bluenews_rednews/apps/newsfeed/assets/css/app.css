@@ -11,6 +11,10 @@
     color: rgb(58, 57, 57);
 }
 
+.liberal-container, .conservative-container, .non-partisan-container {
+    padding-bottom: 2rem;
+}
+
 .liberal-container {
     background-color: #0385AB !important;
     color: white !important;
@@ -45,10 +49,6 @@
 
 .nav {
     margin-top: 0;
-}
-
-a {
-    color: rgb(58, 57, 57) !important;
 }
 
 #search-by-keyword, #other-sources {

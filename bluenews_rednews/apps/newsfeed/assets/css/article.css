@@ -1,0 +1,14 @@
+#article-container {
+    background-color: white;
+    color: rgb(58, 57, 57);
+    padding: 2rem;
+}
+
+.badge {
+    background-color: rgb(58, 57, 57) !important;
+}
+
+img {
+    width: 100%;
+    margin: 1rem 0rem 1rem 0rem;
+}
