@@ -1,0 +1,11 @@
+{application,scrape,
+             [{applications,[kernel,stdlib,elixir,logger,httpoison,tzdata]},
+              {description,"Scrape any website, article or RSS/Atom feed with ease!\n"},
+              {modules,['Elixir.Scrape','Elixir.Scrape.Article',
+                        'Elixir.Scrape.Exquery','Elixir.Scrape.Feed',
+                        'Elixir.Scrape.Fetch','Elixir.Scrape.Filter',
+                        'Elixir.Scrape.Link','Elixir.Scrape.Util.Stopwords',
+                        'Elixir.Scrape.Util.Tags','Elixir.Scrape.Util.Text',
+                        'Elixir.Scrape.Website']},
+              {registered,[]},
+              {vsn,"1.2.7"}]}.

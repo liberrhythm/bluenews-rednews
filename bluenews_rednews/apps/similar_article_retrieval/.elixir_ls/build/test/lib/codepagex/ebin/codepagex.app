@@ -1,0 +1,11 @@
+{application,codepagex,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"Codepagex is an  elixir library to convert between string encodings to and\nfrom utf-8. Like iconv, but written in pure Elixir.\n"},
+              {modules,['Elixir.Codepagex','Elixir.Codepagex.Error',
+                        'Elixir.Codepagex.MappingFile',
+                        'Elixir.Codepagex.Mappings',
+                        'Elixir.Codepagex.Mappings.Helpers',
+                        'Elixir.Mix.Tasks.Codepagex.Benchee',
+                        'Elixir.Mix.Tasks.Codepagex.Unicode']},
+              {registered,[]},
+              {vsn,"0.1.4"}]}.

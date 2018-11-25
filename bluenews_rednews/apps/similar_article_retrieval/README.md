@@ -27,4 +27,4 @@ Sources:
 * https://www.businessinsider.com/what-your-preferred-news-outlet-says-about-your-political-ideology-2014-10
 * https://www.washingtonpost.com/news/the-fix/wp/2014/10/21/the-gop-hates-the-lamestream-media-even-more-than-you-think/?utm_term=.c7acc0aee1f1
 * http://www.journalism.org/2016/02/25/reddit-news-users-more-likely-to-be-male-young-and-digital-in-their-news-preferences/
-* 
+
