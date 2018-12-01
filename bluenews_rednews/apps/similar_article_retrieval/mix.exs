@@ -19,7 +19,7 @@ defmodule SimilarArticleRetrieval.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {SimilarArticleRetrieval.Application, []}
+      # mod: {SimilarArticleRetrieval.Application, []}
     ]
   end
 
@@ -30,7 +30,8 @@ defmodule SimilarArticleRetrieval.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
       # {:sibling_app_in_umbrella, in_umbrella: true},
       {:article_processing, in_umbrella: true},
-      {:httpoison, "~> 1.4", override: true}
+      {:httpoison, "~> 1.4", override: true},
+      {:poison, "~> 3.1"}
     ]
   end
 end

@@ -1,18 +1,6 @@
 defmodule SimilarArticleRetrieval do
-  @moduledoc """
-  Documentation for SimilarArticleRetrieval.
-  """
 
-  @doc """
-  Hello world.
+  defdelegate get_all_articles(keywords), to: SimilarArticleRetrieval.Impl
+  defdelegate get_all_sources(), to: SimilarArticleRetrieval.Impl
 
-  ## Examples
-
-      iex> SimilarArticleRetrieval.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end

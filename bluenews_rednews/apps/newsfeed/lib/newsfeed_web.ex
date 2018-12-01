@@ -26,10 +26,9 @@ defmodule NewsfeedWeb do
     end
   end
 
-  def view do
+  def view(opts \\ [root: "lib/newsfeed_web/templates", namespace: NewsfeedWeb]) do
     quote do
-      use Phoenix.View, root: "lib/newsfeed_web/templates",
-                        namespace: NewsfeedWeb
+      use Phoenix.View, unquote(opts)
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
@@ -40,6 +39,8 @@ defmodule NewsfeedWeb do
       import NewsfeedWeb.Router.Helpers
       import NewsfeedWeb.ErrorHelpers
       import NewsfeedWeb.Gettext
+
+      import NewsfeedWeb.Components.ComponentHelpers
     end
   end
 
@@ -63,5 +64,8 @@ defmodule NewsfeedWeb do
   """
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
+  end
+  defmacro __using__({which, opts}) when is_atom(which) do
+    apply(__MODULE__, which, [opts])
   end
 end
