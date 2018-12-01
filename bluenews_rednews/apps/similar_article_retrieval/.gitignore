@@ -24,3 +24,6 @@ similar_article_retrieval-*.tar
 
 # Ignore all secret files containing secrets and keys
 *.secret.exs
+
+# Ignore all .elixir_ls files
+*.elixir_ls
