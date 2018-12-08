@@ -5,10 +5,6 @@ defmodule Newsfeed.Mixfile do
     [
       app: :newsfeed,
       version: "0.0.1",
-      build_path: "../../_build",
-      config_path: "../../config/config.exs",
-      deps_path: "../../deps",
-      lockfile: "../../mix.lock",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -42,7 +38,9 @@ defmodule Newsfeed.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:plug_cowboy, "~> 1.0"}
+      {:plug_cowboy, "~> 1.0"},
+      {:article_processing, path: "../libraries/article_processing"},
+      {:similar_article_retrieval, path: "../libraries/similar_article_retrieval"}
     ]
   end
 end
