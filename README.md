@@ -1,3 +1,3 @@
-# Coder's Choice
+# Blue News, Red News
 
-See the assignment on Canvas for details
+A look at liberal, conservative, and non-partisan news media: side by side.
