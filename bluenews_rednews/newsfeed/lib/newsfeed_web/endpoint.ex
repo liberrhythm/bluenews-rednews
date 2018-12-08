@@ -35,7 +35,7 @@ defmodule NewsfeedWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_newsfeed_key",
-    signing_salt: "G/XwUHPr"
+    signing_salt: "NgFvDZRD"
 
   plug NewsfeedWeb.Router
 

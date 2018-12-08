@@ -5,14 +5,10 @@
 # is restricted to this project.
 use Mix.Config
 
-# General application configuration
-config :newsfeed,
-  namespace: Newsfeed
-
 # Configures the endpoint
 config :newsfeed, NewsfeedWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "QWkJVlyINkoV61dMjZV7Dip5pQqvRWaSMmikEI0Cn6md0CUVAzdIuekyAs2Pjmvn",
+  secret_key_base: "8by0H3n7xcube64PPPDB3A/EWZEeP3Ckaqxg4Yurm49iqynYvwC+arTF/NlD/uRX",
   render_errors: [view: NewsfeedWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Newsfeed.PubSub,
            adapter: Phoenix.PubSub.PG2]
