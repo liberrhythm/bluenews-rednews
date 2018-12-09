@@ -55,6 +55,28 @@ defmodule SimilarArticleRetrieval.Impl do
     "the-wall-street-journal"
   ]
 
+  # other news sources for additional query search
+  @other_news_srcs %{
+    "ABC News": "abc-news",
+    "Al Jazeera America": "al-jazeera-english",
+    "Associated Press": "associated-press",
+    "Axios": "axios",
+    "Breitbart": "breitbart-news",
+    "CBS News": "cbs-news",
+    "CNN": "cnn",
+    "Google News": "google-news",
+    "NBC News": "nbc-news",
+    "Newsweek": "newsweek",
+    "NY Magazine": "new-york-magazine",
+    "Reddit": "reddit-r-all",
+    "Reuters": "reuters",
+    "Time": "time",
+    "USA Today": "usa-today",
+    "Vice News": "vice-news",
+    "The Washington Post": "the-washington-post",
+    "The Washington Times": "the-washington-times"
+  }
+
   # PRIMARY RETRIEVAL FUNCTIONS
 
   def get_all_articles(keywords) do
@@ -68,6 +90,10 @@ defmodule SimilarArticleRetrieval.Impl do
     retrieve_sources()
     |> filter_sources()
     |> classify_sources()
+  end
+
+  def get_other_sources_map() do
+    @other_news_srcs
   end
 
   # RETRIEVAL, FILTER, CLASSIFY FUNCTIONS

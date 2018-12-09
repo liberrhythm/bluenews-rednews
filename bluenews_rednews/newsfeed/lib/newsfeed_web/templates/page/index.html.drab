@@ -7,7 +7,7 @@
     </div>
     <div class="d-flex justify-content-center flex-wrap text-center">
       <input id="user-input" type="text">
-      <button drab-click="button_clicked" class="btn btn-sm btn-primary">Search</button>
+      <button drab-click="searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
     </div>
   </div>
   <div id="other-sources">
@@ -17,20 +17,11 @@
       </div>
     </div>
     <div class="d-flex justify-content-center flex-wrap text-center">
-      <button class="btn btn-sm pill">ABC News</button>
-      <button class="btn btn-sm pill">CBS News</button>
-      <button class="btn btn-sm pill">NBC News</button>
-      <button class="btn btn-sm pill">Axios</button>
-      <button class="btn btn-sm pill">Al Jazeera America</button>
-      <button class="btn btn-sm pill">NBC News</button>
-      <button class="btn btn-sm pill">Reddit</button>
-      <button class="btn btn-sm pill">Reuters</button>
-      <button class="btn btn-sm pill">The Washington Times</button>
-      <button class="btn btn-sm pill">Time</button>
-      <button class="btn btn-sm pill">USA Today</button>
-      <button class="btn btn-sm pill">NY Magazine</button>
-      <button class="btn btn-sm pill">Newsweek</button>
-      <button class="btn btn-sm pill">Breitbart</button>
+      <%= for {key, value} <- @other_sources do %>
+        <button drab-click='srcbtn_clicked("<%= value %>")' class="btn btn-sm pill">
+          <%= key %>
+        </button>
+      <% end %>
     </div>
   </div>
 </div>
