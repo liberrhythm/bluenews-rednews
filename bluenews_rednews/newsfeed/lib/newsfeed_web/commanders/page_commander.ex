@@ -3,20 +3,50 @@ defmodule NewsfeedWeb.PageCommander do
 
   # Place your event handlers here
 
-  defhandler searchbtn_clicked(socket, _sender) do
+  defhandler url_searchbtn_clicked(socket, _sender) do
     # reset other_sources
     other_sources = SimilarArticleRetrieval.get_other_sources_map()
     put_store(socket, :other_sources, other_sources)
     poke(socket, "index.html", other_sources: other_sources)
 
-    query = query(socket, "#user-input", :value)
+    query = query(socket, "#url-user-input", :value)
     case query do
       {:ok, _values} ->
-        # user_input = values["#user-input"]["value"]
+        # user_input = values["#url-user-input"]["value"]
         # article = ArticleProcessing.process_article(user_input)
         # IO.inspect article.keywords
 
         keywords = ["investigation", "fbi", "mueller"]
+        put_store(socket, :keywords, keywords)
+        articles = SimilarArticleRetrieval.get_all_articles(keywords)
+
+        liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
+        conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)
+
+        put_store(socket, :liberal_articles, liberal_articles)
+        put_store(socket, :conservative_articles, conservative_articles)
+
+        poke(socket, "index.html", liberal_articles: liberal_articles)
+        poke(socket, "index.html", conservative_articles: conservative_articles)
+
+      _ ->
+        nil
+    end
+  end
+
+  defhandler kwd_searchbtn_clicked(socket, _sender) do
+
+    # reset other_sources
+    other_sources = SimilarArticleRetrieval.get_other_sources_map()
+    put_store(socket, :other_sources, other_sources)
+    poke(socket, "index.html", other_sources: other_sources)
+
+    query = query(socket, "#kwd-user-input", :value)
+    case query do
+      {:ok, values} ->
+        keywords = values["#kwd-user-input"]["value"]
+          |> String.split(", ")
+
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)
 

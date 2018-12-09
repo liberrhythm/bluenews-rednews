@@ -4,16 +4,20 @@
       <div class="col-sm-6 text-center">
         <h4>Search News by URL</h4>
         <div class="d-flex justify-content-center flex-wrap text-center">
-          <input id="user-input" type="text">
-          <button drab-click="searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
+          <input id="url-user-input" type="text">
+          <button drab-click="url_searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
+          <h6>Type in a valid url to a news article.</h6>
+          <h6>Example: https://www.economist.com/democracy-in-america/2018/12/06/why-life-expectancy-in-america-is-down-again</h6>
         </div>
       </div>
       <div class="col-sm-6 text-center">
-        <h4>Search News by Keyword</h4>
+        <h4>Search News by Keywords</h4>
         <div class="d-flex justify-content-center flex-wrap text-center">
-          <input disabled id="user-input" type="text">
-          <button disabled drab-click="searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
+          <input id="kwd-user-input" type="text">
+          <button drab-click="kwd_searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
         </div>
+        <h6>Type in a list of keywords separated by commas.</h6>
+        <h6>Example: politics, national, security</h6>
       </div>
     </div>
     
