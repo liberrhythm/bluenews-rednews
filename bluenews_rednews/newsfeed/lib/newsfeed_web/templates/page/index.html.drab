@@ -35,19 +35,19 @@
 </div>
 
 <div id="news-feed" class="row">
-  <div class="col-sm-4 liberal-container">
+  <div id="liberal-container" class="col-sm-6">
     <h3>Liberal</h3>
     <%= for article <- @liberal_articles do %>
       <%= c :article, :index, article: article %>
     <% end %>
   </div>
-  <div class="col-sm-4 non-partisan-container">
+  <div id="non-partisan-container" class="col-sm-4">
     <h3>Non-Partisan</h3>
     <%= for article <- @nonpartisan_articles do %>
       <%= c :article, :index, article: article %>
     <% end %>
   </div>
-  <div class="col-sm-4 conservative-container">
+  <div id="conservative-container" class="col-sm-6">
     <h3>Conservative</h3>
     <%= for article <- @conservative_articles do %>
       <%= c :article, :index, article: article %>

@@ -64,10 +64,20 @@ defmodule NewsfeedWeb.PageCommander do
   end
 
   defp add_article(:non_partisan, socket, article) do
+    # resize columns when nonpartisan news sources are pulled
+    set_style(socket, "#non-partisan-container", display: "block")
+    set_prop(socket, "#liberal-container", %{"attributes" => %{"class" => "col-sm-4"}})
+    set_prop(socket, "#conservative-container", %{"attributes" => %{"class" => "col-sm-4"}})
+
     updated_articles = [ article | get_store(socket, :nonpartisan_articles) ]
     put_store(socket, :nonpartisan_articles, updated_articles)
     poke(socket, "index.html", nonpartisan_articles: updated_articles)
   end
+
+  # defp resize_bias_columns(socket) do
+  #   IO.inspect query_one(socket, "#liberal-container", :height)
+  #   # height2 = query_one(socket, "#conservative-container", property_or_properties_list)
+  # end
 
   # Place your callbacks here
 
