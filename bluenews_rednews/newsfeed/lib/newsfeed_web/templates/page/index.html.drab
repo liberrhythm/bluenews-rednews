@@ -44,13 +44,13 @@
   <div class="col-sm-6 liberal-container">
     <h3>Liberal</h3>
     <%= for article <- @liberal_articles do %>
-      <%= article["title"] %>
+      <%= c :article, :index, article: article %>
     <% end %>
   </div>
   <div class="col-sm-6 conservative-container">
     <h3>Conservative</h3>
     <%= for article <- @conservative_articles do %>
-      <%= article["title"] %>
+      <%= c :article, :index, article: article %>
     <% end %>
   </div>
 </div>

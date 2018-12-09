@@ -1,10 +1,12 @@
+<% article = assigns[:article] %>
+
 <div id="article-container">
-  <span class="badge">The Wall Street Journal</span>
-  <h4>Mexico in Talks With U.S. Over Plan to Require Migrants to Stay on Its Side of Border</h4>
-  <h5>Plan seeks to limit the number of migrants seeking asylum who are allowed to stay in the U.S.</h5>
-  <img src="https://images.wsj.net/im-38709?width=1260&aspect_ratio=1.5">
-  <p>MEXICO CITY—Top advisers to Mexican president-elect Andrés Manuel López Obrador are in talks with the Trump administration over a plan that would require migrants seeking asylum in the U.S. to wait in Mexico while their claims are adjudicated, according to members of Mr. López Obrador’s team.</p>
-  <a href="https://www.wsj.com/articles/mexico-in-talks-with-u-s-over-plan-to-require-migrants-to-stay-on-its-side-of-border-1543097325?mod=hp_lead_pos1">
+  <span class="badge"><%= article["source"]["name"] %></span>
+  <h4><%= article["title"] %></h4>
+  <h5><%= article["description"] %></h5>
+  <img src="<%= article["urlToImage"] %>">
+  <p><%= article["content"] %></p>
+  <a href="<%= article["url"] %>">
     Go to full article
   </a>
 </div>
