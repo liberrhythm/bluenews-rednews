@@ -86,6 +86,12 @@ defmodule SimilarArticleRetrieval.Impl do
     |> classify_articles()
   end
 
+  def get_one_article(keywords, source) do
+    [ retrieve_article(process_keywords(keywords), source) ]
+    |> filter_articles()
+    |> classify_articles()
+  end
+
   def get_all_sources() do
     retrieve_sources()
     |> filter_sources()

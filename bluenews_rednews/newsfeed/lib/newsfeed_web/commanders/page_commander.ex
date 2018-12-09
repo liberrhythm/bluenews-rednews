@@ -19,6 +19,9 @@ defmodule NewsfeedWeb.PageCommander do
         liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
         conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)
 
+        put_store(socket, :liberal_articles, liberal_articles)
+        put_store(socket, :conservative_articles, conservative_articles)
+
         poke(socket, "index.html", liberal_articles: liberal_articles)
         poke(socket, "index.html", conservative_articles: conservative_articles)
 
@@ -27,21 +30,28 @@ defmodule NewsfeedWeb.PageCommander do
     end
   end
 
-  defhandler srcbtn_clicked(_socket, _sender, value) do
-    IO.inspect value
-        # user_input = values["#user-input"]["value"]
+  defhandler srcbtn_clicked(socket, _sender, value) do
+    keywords = ["investigation", "fbi", "mueller"]
+    article = Enum.at(SimilarArticleRetrieval.get_one_article(keywords, value), 0)
+    add_article(article["bias"], socket, article)
+  end
 
-        # article = ArticleProcessing.process_article(user_input)
+  defp add_article(:liberal, socket, article) do
+    updated_articles = [ article | get_store(socket, :liberal_articles) ]
+    put_store(socket, :liberal_articles, updated_articles)
+    poke(socket, "index.html", liberal_articles: updated_articles)
+  end
 
-        # IO.inspect article.keywords
-        # keywords = ["investigation", "fbi", "mueller"]
-        # articles = SimilarArticleRetrieval.get_all_articles(keywords)
+  defp add_article(:conservative, socket, article) do
+    updated_articles = [ article | get_store(socket, :conservative_articles) ]
+    put_store(socket, :conservative_articles, updated_articles)
+    poke(socket, "index.html", conservative_articles: updated_articles)
+  end
 
-        # liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
-        # conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)
-
-        # poke(socket, "index.html", liberal_articles: liberal_articles)
-        # poke(socket, "index.html", conservative_articles: conservative_articles)
+  defp add_article(:non_partisan, socket, article) do
+    updated_articles = [ article | get_store(socket, :nonpartisan_articles) ]
+    put_store(socket, :nonpartisan_articles, updated_articles)
+    poke(socket, "index.html", nonpartisan_articles: updated_articles)
   end
 
   # Place your callbacks here
@@ -49,8 +59,12 @@ defmodule NewsfeedWeb.PageCommander do
   onload :page_loaded
 
   def page_loaded(socket) do
+    put_store(socket, :liberal_articles, [])
+    put_store(socket, :conservative_articles, [])
+    put_store(socket, :nonpartisan_articles, [])
+
     other_sources = SimilarArticleRetrieval.get_other_sources_map()
-    # put_store(socket, :other_sources, other_sources)
+    put_store(socket, :other_sources, other_sources)
     poke(socket, "index.html", other_sources: other_sources)
   end
 end
