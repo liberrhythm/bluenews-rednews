@@ -51,6 +51,7 @@
     margin-top: 0;
 }
 
-#search-by-keyword, #other-sources {
-    margin-top: 1rem;
+#search, #other-sources {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }

@@ -4,14 +4,18 @@ defmodule NewsfeedWeb.PageCommander do
   # Place your event handlers here
 
   defhandler searchbtn_clicked(socket, _sender) do
+    # reset other_sources
+    other_sources = SimilarArticleRetrieval.get_other_sources_map()
+    put_store(socket, :other_sources, other_sources)
+    poke(socket, "index.html", other_sources: other_sources)
+
     query = query(socket, "#user-input", :value)
     case query do
       {:ok, _values} ->
         # user_input = values["#user-input"]["value"]
-
         # article = ArticleProcessing.process_article(user_input)
-
         # IO.inspect article.keywords
+
         keywords = ["investigation", "fbi", "mueller"]
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)
@@ -30,10 +34,21 @@ defmodule NewsfeedWeb.PageCommander do
     end
   end
 
-  defhandler srcbtn_clicked(socket, _sender, value) do
+  defhandler srcbtn_clicked(socket, _sender, key) do
+    # get relevant information
+    key_atom = String.to_atom(key)
+    other_sources = get_store(socket, :other_sources)
+    value = Map.get(other_sources, key_atom)
+
+    # add article to newsfeed
     keywords = ["investigation", "fbi", "mueller"]
     article = Enum.at(SimilarArticleRetrieval.get_one_article(keywords, value), 0)
     add_article(article["bias"], socket, article)
+
+    # remove news source as available option
+    updated_sources = Map.delete(other_sources, key_atom)
+    put_store(socket, :other_sources, updated_sources)
+    poke(socket, "index.html", other_sources: updated_sources)
   end
 
   defp add_article(:liberal, socket, article) do
