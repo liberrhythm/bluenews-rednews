@@ -39,6 +39,7 @@ defmodule Newsfeed.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
+      {:drab, "~> 0.10.0"},
       {:article_processing, path: "../libraries/article_processing"},
       {:similar_article_retrieval, path: "../libraries/similar_article_retrieval"}
     ]

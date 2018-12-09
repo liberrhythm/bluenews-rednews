@@ -13,6 +13,14 @@ config :newsfeed, NewsfeedWeb.Endpoint,
   pubsub: [name: Newsfeed.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Configures Drab
+config :drab, NewsfeedWeb.Endpoint,
+  otp_app: :newsfeed
+
+# Configures default Drab file extension
+config :phoenix, :template_engines,
+  drab: Drab.Live.Engine
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

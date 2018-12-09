@@ -1,6 +1,7 @@
 defmodule SimilarArticleRetrieval.Impl do
   @base_url "https://newsapi.org/v2"
-  @newsapi_key Application.get_env(:similar_article_retrieval, :newsapi_key)
+  # @newsapi_key Application.get_env(:similar_article_retrieval, :newsapi_key)
+  @newsapi_key "807829b7f8864563ac77a975581cba84"
 
   # 28 news source categorized by media bias
   @news_sources %{
@@ -57,6 +58,7 @@ defmodule SimilarArticleRetrieval.Impl do
   # PRIMARY RETRIEVAL FUNCTIONS
 
   def get_all_articles(keywords) do
+    IO.inspect @newsapi_key
     retrieve_articles(@default_news_srcs, process_keywords(keywords))
     |> filter_articles()
     |> classify_articles()
@@ -87,11 +89,13 @@ defmodule SimilarArticleRetrieval.Impl do
   end
 
   def filter_articles(results) do
+    IO.inspect results
     results
     |> Enum.map(fn result -> Enum.at(result["articles"], 0) end)
   end
 
   def classify_articles(articles) do
+    IO.inspect articles
     articles
     |> Enum.map(fn article ->
       Map.put(article, "bias", identify_src_bias(article["source"]["id"]))

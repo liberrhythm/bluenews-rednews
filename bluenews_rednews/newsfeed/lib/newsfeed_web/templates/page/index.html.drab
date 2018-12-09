@@ -1,3 +1,8 @@
+<div class="jumbotron">
+  <h2><%= "hello" %></h2>
+  <div id="output_div"></div>
+</div>
+
 <div id="options" class="container">
   <div id="search-by-keyword">
     <div class="row">
@@ -6,7 +11,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-center flex-wrap text-center">
-      <input type="text">
+      <input id="user-input" type="text">
+      <button drab-click="button_clicked" class="btn btn-sm btn-primary">Search</button>
     </div>
   </div>
   <div id="other-sources">
