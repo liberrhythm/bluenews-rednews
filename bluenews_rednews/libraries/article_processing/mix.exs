@@ -14,7 +14,7 @@ defmodule ArticleProcessing.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      applications: [:textgain, :scrape],
+      applications: [:cognixir, :scrape],
       extra_applications: [:logger]
     ]
   end
@@ -26,7 +26,7 @@ defmodule ArticleProcessing.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
       # {:sibling_app_in_umbrella, in_umbrella: true},
       {:scrape, "~> 1.0"},
-      {:textgain, "~> 0.1.0"}
+      {:cognixir, "~> 0.4.0"}
     ]
   end
 end

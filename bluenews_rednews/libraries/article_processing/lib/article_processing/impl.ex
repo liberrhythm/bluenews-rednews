@@ -19,10 +19,13 @@ defmodule ArticleProcessing.Impl do
       }
 
   """
-
-  @api_key Application.get_env(:article_processing, ArticleProcessing.Impl)[:api_key]
+  alias Cognixir.TextAnalytics, as: TA
 
   defstruct article_info: %{}, keywords: []
+
+  def test do
+    TA.detect_key_phrases("I'm looking for bananas. Do you have bananas?", "en")
+  end
 
   def process_article(article) do
     results = scrape_article(article)
@@ -61,19 +64,16 @@ defmodule ArticleProcessing.Impl do
   defp filter_keywords(keywords) do
     keywords
       |> Enum.join(" ")
-      |> Textgain.tag(lang: "en")
-      |> find_nouns
+      |> TA.detect_key_phrases("en")
+      |> get_keywords()
   end
 
-  defp find_nouns({:ok, textgain}) do
-    IO.inspect textgain
-    textgain.text
-      |> List.flatten
-      |> Enum.filter(fn res -> Map.get(res, "tag") == "NOUN" end)
-      |> Enum.map(fn noun -> Map.get(noun, "word") end)
+  defp get_keywords({:ok, keywords}) do
+    keywords
+      |> Enum.map(fn phrase -> String.split(phrase, " ") end)
+      |> List.flatten()
   end
 
-  # defp insert_keyword(kw, keywords) do
-  #   [kw | keywords]
-  # end
+  defp get_keywords({:error, error}), do: error
+
 end
