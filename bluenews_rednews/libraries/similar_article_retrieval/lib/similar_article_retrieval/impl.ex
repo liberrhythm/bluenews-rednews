@@ -1,7 +1,6 @@
 defmodule SimilarArticleRetrieval.Impl do
   @base_url "https://newsapi.org/v2"
-  # @newsapi_key Application.get_env(:similar_article_retrieval, :newsapi_key)
-  @newsapi_key "807829b7f8864563ac77a975581cba84"
+  @newsapi_key Application.get_env(:similar_article_retrieval, SimilarArticleRetrieval.Impl)[:newsapi_key]
 
   # 28 news source categorized by media bias
   @news_sources %{

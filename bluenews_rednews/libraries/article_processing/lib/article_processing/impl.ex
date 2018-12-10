@@ -20,6 +20,8 @@ defmodule ArticleProcessing.Impl do
 
   """
 
+  @api_key Application.get_env(:article_processing, ArticleProcessing.Impl)[:api_key]
+
   defstruct article_info: %{}, keywords: []
 
   def process_article(article) do
@@ -64,6 +66,7 @@ defmodule ArticleProcessing.Impl do
   end
 
   defp find_nouns({:ok, textgain}) do
+    IO.inspect textgain
     textgain.text
       |> List.flatten
       |> Enum.filter(fn res -> Map.get(res, "tag") == "NOUN" end)

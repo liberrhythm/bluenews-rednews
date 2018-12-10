@@ -4,19 +4,23 @@ defmodule NewsfeedWeb.PageCommander do
   # Place your event handlers here
 
   defhandler url_searchbtn_clicked(socket, _sender) do
+
     # reset other_sources
     other_sources = SimilarArticleRetrieval.get_other_sources_map()
     put_store(socket, :other_sources, other_sources)
     poke(socket, "index.html", other_sources: other_sources)
 
+    # reset other input
+    set_prop(socket, "#kwd-user-input", value: "")
+
     query = query(socket, "#url-user-input", :value)
     case query do
-      {:ok, _values} ->
-        # user_input = values["#url-user-input"]["value"]
-        # article = ArticleProcessing.process_article(user_input)
-        # IO.inspect article.keywords
+      {:ok, values} ->
+        user_input = values["#url-user-input"]["value"]
+        article = ArticleProcessing.process_article(user_input)
+        keywords = article.keywords
+        IO.inspect keywords
 
-        keywords = ["investigation", "fbi", "mueller"]
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)
 
@@ -40,6 +44,9 @@ defmodule NewsfeedWeb.PageCommander do
     other_sources = SimilarArticleRetrieval.get_other_sources_map()
     put_store(socket, :other_sources, other_sources)
     poke(socket, "index.html", other_sources: other_sources)
+
+    # reset other input
+    set_prop(socket, "#url-user-input", value: "")
 
     query = query(socket, "#kwd-user-input", :value)
     case query do
