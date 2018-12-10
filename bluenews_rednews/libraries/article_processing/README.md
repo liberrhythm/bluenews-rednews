@@ -1,6 +1,5 @@
 # ArticleProcessing
-
-**TODO: Add description**
+ArticleProcessing is a library that takes a URL to an online news article, scrapes the content of the article, and returns both data about the article and a list of keywords covering the main topics of the article.
 
 ## Installation
 

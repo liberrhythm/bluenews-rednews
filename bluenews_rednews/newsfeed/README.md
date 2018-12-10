@@ -1,24 +1,30 @@
-# Newsfeed
+# Blue News, Red News
+See Liberal News and Conservative News, Side by Side
 
-To start your Phoenix server:
+## Installation
 
+  * Clone this GitHub repository with `git clone https://github.com/liberrhythm/05-coders-choice`
+  * Move into the bluenews_rednews directory with `cd bluenews_rednews`
   * Install dependencies with `mix deps.get`
   * Install Node.js dependencies with `cd assets && npm install`
   * Start Phoenix endpoint with `mix phx.server`
+  * Visit [`localhost:4000`](http://localhost:4000) from your browser to see the Blue News, Red News app.
+  * Have fun playing around!
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Media Bias References
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+  * http://www.adfontesmedia.com/the-chart-version-3-0-what-exactly-are-we-reading/
+  * https://www.businessinsider.com/what-your-preferred-news-outlet-says-about-your-political-ideology-2014-10
+  * https://guides.lib.umich.edu/c.php?g=637508&p=4462444
+  * http://www.journalism.org/2014/10/21/section-1-media-sources-distinct-favorites-emerge-on-the-left-and-right/
+  * 
+  http://www.journalism.org/2016/02/25/reddit-news-users-more-likely-to-be-male-young-and-digital-in-their-news-preferences/
+  * https://www.marketwatch.com/story/how-does-your-favorite-news-source-rate-on-the-truthiness-scale-consult-this-chart-2016-12-15
+  * https://www.washingtonpost.com/news/the-fix/wp/2014/10/21/the-gop-hates-the-lamestream-media-even-more-than-you-think/?utm_term=.c7acc0aee1f1
 
-## Learn more
+## Acknowledgements
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+  * @kimlindholm for the reusable components code from https://github.com/kimlindholm/phoenix_component_folders
+  * @pragdave (Dave Thomas) for an amazing semester in CSE 5391
 
-## References
-
-  * Reusable components code obtained with permission from @kimlindholm https://github.com/kimlindholm/phoenix_component_folders
 
