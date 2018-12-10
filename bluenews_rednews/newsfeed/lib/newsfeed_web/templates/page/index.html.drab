@@ -20,8 +20,8 @@
         <h6>Example: politics, national, security</h6>
       </div>
     </div>
-    
   </div>
+  <div id="no-results-alert" class="alert alert-warning" role="alert">No articles available for the given URL/keywords.</div>
   <div id="other-sources">
     <div class="row">
       <div class="col-sm-12 text-center">
@@ -58,5 +58,3 @@
     <% end %>
   </div>
 </div>
-
-<!-- <%= gettext "Welcome to %{name}!", name: "Phoenix" %> -->

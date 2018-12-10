@@ -5,10 +5,7 @@ defmodule NewsfeedWeb.PageCommander do
 
   defhandler url_searchbtn_clicked(socket, _sender) do
 
-    # reset other_sources
-    other_sources = SimilarArticleRetrieval.get_other_sources_map()
-    put_store(socket, :other_sources, other_sources)
-    poke(socket, "index.html", other_sources: other_sources)
+    reset(socket)
 
     # reset other input
     set_prop(socket, "#kwd-user-input", value: "")
@@ -18,23 +15,13 @@ defmodule NewsfeedWeb.PageCommander do
       {:ok, values} ->
         user_input = values["#url-user-input"]["value"]
         article = ArticleProcessing.process_article(user_input)
-        IO.inspect article
+
         keywords = article.keywords
-        IO.inspect keywords
 
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)
 
-        IO.inspect articles
-
-        liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
-        conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)
-
-        put_store(socket, :liberal_articles, liberal_articles)
-        put_store(socket, :conservative_articles, conservative_articles)
-
-        poke(socket, "index.html", liberal_articles: liberal_articles)
-        poke(socket, "index.html", conservative_articles: conservative_articles)
+        set_default_articles(articles, socket)
 
       _ ->
         nil
@@ -43,10 +30,7 @@ defmodule NewsfeedWeb.PageCommander do
 
   defhandler kwd_searchbtn_clicked(socket, _sender) do
 
-    # reset other_sources
-    other_sources = SimilarArticleRetrieval.get_other_sources_map()
-    put_store(socket, :other_sources, other_sources)
-    poke(socket, "index.html", other_sources: other_sources)
+    reset(socket)
 
     # reset other input
     set_prop(socket, "#url-user-input", value: "")
@@ -60,14 +44,7 @@ defmodule NewsfeedWeb.PageCommander do
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)
 
-        liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
-        conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)
-
-        put_store(socket, :liberal_articles, liberal_articles)
-        put_store(socket, :conservative_articles, conservative_articles)
-
-        poke(socket, "index.html", liberal_articles: liberal_articles)
-        poke(socket, "index.html", conservative_articles: conservative_articles)
+        set_default_articles(articles, socket)
 
       _ ->
         nil
@@ -114,12 +91,36 @@ defmodule NewsfeedWeb.PageCommander do
     poke(socket, "index.html", nonpartisan_articles: updated_articles)
   end
 
-  # defp resize_bias_columns(socket) do
-  #   IO.inspect query_one(socket, "#liberal-container", :height)
-  #   # height2 = query_one(socket, "#conservative-container", property_or_properties_list)
-  # end
+  defp reset(socket) do
+    # reset other_sources
+    other_sources = SimilarArticleRetrieval.get_other_sources_map()
+    put_store(socket, :other_sources, other_sources)
+    poke(socket, "index.html", other_sources: other_sources)
 
-  # Place your callbacks here
+    #reset nonpartisan sources
+    set_style(socket, "#non-partisan-container", display: "none")
+    put_store(socket, :nonpartisan_articles, [])
+    set_prop(socket, "#liberal-container", %{"attributes" => %{"class" => "col-sm-6"}})
+    set_prop(socket, "#conservative-container", %{"attributes" => %{"class" => "col-sm-6"}})
+
+    # reset results
+    set_style(socket, "#no-results-alert", display: "none")
+  end
+
+  defp set_default_articles([], socket) do
+    set_style(socket, "#no-results-alert", display: "block")
+  end
+
+  defp set_default_articles(articles, socket) do
+    liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
+    conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)
+
+    put_store(socket, :liberal_articles, liberal_articles)
+    put_store(socket, :conservative_articles, conservative_articles)
+
+    poke(socket, "index.html", liberal_articles: liberal_articles)
+    poke(socket, "index.html", conservative_articles: conservative_articles)
+  end
 
   onload :page_loaded
 
@@ -133,4 +134,5 @@ defmodule NewsfeedWeb.PageCommander do
     poke(socket, "index.html", other_sources: other_sources)
   end
 end
+
 
