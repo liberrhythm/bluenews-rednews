@@ -4,6 +4,7 @@ defmodule NewsfeedWeb.PageCommander do
   # main event handler functions
 
   defhandler url_searchbtn_clicked(socket, _sender) do
+    set_style(socket, "#other-sources", display: "block")
 
     reset(socket)
 
@@ -29,6 +30,7 @@ defmodule NewsfeedWeb.PageCommander do
   end
 
   defhandler kwd_searchbtn_clicked(socket, _sender) do
+    set_style(socket, "#other-sources", display: "block")
 
     reset(socket)
 

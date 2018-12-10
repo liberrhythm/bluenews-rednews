@@ -80,7 +80,6 @@ defmodule SimilarArticleRetrieval.Impl do
   # PRIMARY RETRIEVAL FUNCTIONS
 
   def get_all_articles(keywords) do
-    IO.inspect @newsapi_key
     retrieve_articles(@default_news_srcs, process_keywords(keywords))
     |> filter_articles()
     |> classify_articles()
@@ -120,14 +119,16 @@ defmodule SimilarArticleRetrieval.Impl do
     end)
   end
 
+  def filter_articles([]), do: []
+
   def filter_articles(results) do
-    IO.inspect results
     results
     |> Enum.map(fn result -> Enum.at(result["articles"], 0) end)
   end
 
+  def classify_articles([]), do: []
+
   def classify_articles(articles) do
-    IO.inspect articles
     articles
     |> Enum.map(fn article ->
       Map.put(article, "bias", identify_src_bias(article["source"]["id"]))

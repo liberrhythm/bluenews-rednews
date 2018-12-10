@@ -57,6 +57,6 @@
     margin-bottom: 2rem;
 }
 
-#no-results-alert {
+#no-results-alert, #other-sources {
     display: none;
 }
