@@ -18,11 +18,14 @@ defmodule NewsfeedWeb.PageCommander do
       {:ok, values} ->
         user_input = values["#url-user-input"]["value"]
         article = ArticleProcessing.process_article(user_input)
+        IO.inspect article
         keywords = article.keywords
         IO.inspect keywords
 
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)
+
+        IO.inspect articles
 
         liberal_articles = Enum.filter(articles, fn art -> art["bias"] == :liberal end)
         conservative_articles = Enum.filter(articles, fn art -> art["bias"] == :conservative end)

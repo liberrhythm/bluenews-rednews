@@ -61,19 +61,21 @@ defmodule ArticleProcessing.Impl do
     }
   end
 
+  defp filter_keywords([]), do: []
+
   defp filter_keywords(keywords) do
     keywords
       |> Enum.join(" ")
-      |> TA.detect_key_phrases("en")
-      |> get_keywords()
+      # |> TA.detect_key_phrases("en")
+      |> String.split(" ")
   end
 
-  defp get_keywords({:ok, keywords}) do
-    keywords
-      |> Enum.map(fn phrase -> String.split(phrase, " ") end)
-      |> List.flatten()
-  end
+  # defp get_keywords(keywords) do
+  #   keywords
+  #     |> String.split(phrase, " ")
+  #     |> List.flatten()
+  # end
 
-  defp get_keywords({:error, error}), do: error
+  # defp get_keywords({:error, error}), do: error
 
 end

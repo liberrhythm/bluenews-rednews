@@ -29,4 +29,6 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-import_config "dev.secret.exs"
+# import_config "dev.secret.exs"
+# config :cognixir, ta_api_key: "4d6b4ea17e1544bcb2212dfc4c9d21ea"
+import_config "#{Mix.env()}.secret.exs"
