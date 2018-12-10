@@ -1,7 +1,7 @@
 defmodule NewsfeedWeb.PageCommander do
   use Drab.Commander
 
-  # Place your event handlers here
+  # main event handler functions
 
   defhandler url_searchbtn_clicked(socket, _sender) do
 
@@ -67,6 +67,8 @@ defmodule NewsfeedWeb.PageCommander do
     put_store(socket, :other_sources, updated_sources)
     poke(socket, "index.html", other_sources: updated_sources)
   end
+
+  # private helper functions
 
   defp add_article(:liberal, socket, article) do
     updated_articles = [ article | get_store(socket, :liberal_articles) ]

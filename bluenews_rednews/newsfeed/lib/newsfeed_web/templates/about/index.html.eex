@@ -1,0 +1,17 @@
+<div class="container text-center">
+    <h3>ABOUT</h3>
+    <h5>The bilateral nature of state of United States politics means that most Americans categorize their political beliefs on a spectrum, ranging from the liberal left to the conservative right. Most of these people gain information on current political events from news sources whose biases align with their own beliefs.</h5>
+    <h5>This website, loosely based off of <i>Blue Feed, Red Feed</i> by the Wall Street Journal, is meant to provide a side by side comparison of news articles that have different perspectives on user-specified issues. Users have the choice of inputting a URL link to a news article or a list of keywords and will be shown a variety of topically similar articles from different liberal, conservative, and non-partisan news outlets.</h5>
+</div>
+
+<div class="container text-center">
+    <h3>METHODOLOGY</h3>
+    <h5><b>Technology</b>: The backend of this website application uses a combination of article processing (website scraping and natural language processing) and news searching (finding topically similar articles using a news application programming interface).</h5>
+    <h5><b>User flows</b>: There are two ways to use this website. One is to input a URL to a news article - the backend will scrape the article, find keywords, and then send it off to another service that will use the keywords and poll the news API for relevant articles from each of ten default news sources that were chosen (five liberal, five conservative). The other flow is similar but skips the URL step in favor of allowing the user to input a list of keywords instead.</h5>
+    <h5><b>Media bias</b>: Research from www.journalism.org, Vanessa Otero’s news bias chart, and other online resources were used to determine a general consensus on the media bias for 28 different English-language news sources.  All 28 are US-based except for BBC. For simplicity’s sake, I chose to classify news sources based on three broad categories - liberal, conservative, and non-partisan. Ten of the sources were considered default news sources - the “Search” buttons will use user input to pull data from those news sources. The others are featured with buttons under “Choose Another Source.” Selecting one of these will add the most relevant article from that source to the newsfeed. Doing another search will clear the newsfeed and repopulate it with new data.</h5>
+</div>
+
+<div class="container text-center">
+    <h3>AUTHOR</h3>
+    <h5>Sabrina Peng is a current junior at Southern Methodist University studying finance and computer science. Thank you to Dave Thomas for introducing the CSE 5391 Fall 2018 class to the amazing world of Elixir!</h5>
+</div>
