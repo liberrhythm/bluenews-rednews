@@ -1,4 +1,0 @@
-# BluenewsRednews
-
-**TODO: Add description**
-

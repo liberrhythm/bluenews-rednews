@@ -1,0 +1,60 @@
+<div id="options" class="container">
+  <div id="search">
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <h4>Search News by URL</h4>
+        <div class="d-flex justify-content-center flex-wrap text-center">
+          <input id="url-user-input" type="text">
+          <button drab-click="url_searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
+          <h6>Type in a valid url to a news article.</h6>
+          <h6>Example: https://www.economist.com/democracy-in-america/2018/12/06/why-life-expectancy-in-america-is-down-again</h6>
+        </div>
+      </div>
+      <div class="col-sm-6 text-center">
+        <h4>Search News by Keywords</h4>
+        <div class="d-flex justify-content-center flex-wrap text-center">
+          <input id="kwd-user-input" type="text">
+          <button drab-click="kwd_searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
+        </div>
+        <h6>Type in a list of keywords separated by commas (the fewer the better).</h6>
+        <h6>Example: politics, national, security</h6>
+      </div>
+    </div>
+  </div>
+  <div id="no-results-alert" class="alert alert-warning" role="alert">No articles available for the given URL/keywords.</div>
+  <div id="other-sources">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h4>Choose Another Source</h4>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center flex-wrap text-center">
+      <%= for {key, value} <- @other_sources do %>
+        <button id="<%= value %>" drab-click='srcbtn_clicked("<%= key %>")' class="btn btn-sm pill">
+          <%= key %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="news-feed" class="row">
+  <div id="liberal-container" class="col-sm-6">
+    <h3>Liberal</h3>
+    <%= for article <- @liberal_articles do %>
+      <%= c :article, :index, article: article %>
+    <% end %>
+  </div>
+  <div id="non-partisan-container" class="col-sm-4">
+    <h3>Non-Partisan</h3>
+    <%= for article <- @nonpartisan_articles do %>
+      <%= c :article, :index, article: article %>
+    <% end %>
+  </div>
+  <div id="conservative-container" class="col-sm-6">
+    <h3>Conservative</h3>
+    <%= for article <- @conservative_articles do %>
+      <%= c :article, :index, article: article %>
+    <% end %>
+  </div>
+</div>
