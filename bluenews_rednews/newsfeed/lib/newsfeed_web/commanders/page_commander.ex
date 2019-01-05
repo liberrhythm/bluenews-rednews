@@ -40,8 +40,9 @@ defmodule NewsfeedWeb.PageCommander do
     query = query(socket, "#kwd-user-input", :value)
     case query do
       {:ok, values} ->
+
         keywords = values["#kwd-user-input"]["value"]
-          |> String.split(", ")
+          |> String.split(:binary.compile_pattern([" ", ",", ", "]))
 
         put_store(socket, :keywords, keywords)
         articles = SimilarArticleRetrieval.get_all_articles(keywords)

@@ -16,7 +16,7 @@
           <input id="kwd-user-input" type="text">
           <button drab-click="kwd_searchbtn_clicked" class="btn btn-sm btn-primary">Search</button>
         </div>
-        <h6>Type in a list of keywords separated by commas (the fewer the better).</h6>
+        <h6>Type in a list of keywords or phrases separated by commas (the fewer the better).</h6>
         <h6>Example: politics, national, security</h6>
       </div>
     </div>
