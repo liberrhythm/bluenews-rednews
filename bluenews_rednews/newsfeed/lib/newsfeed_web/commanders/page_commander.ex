@@ -60,7 +60,7 @@ defmodule NewsfeedWeb.PageCommander do
     value = Map.get(other_sources, key_atom)
 
     # add article to newsfeed
-    keywords = ["investigation", "fbi", "mueller"]
+    keywords = get_store(socket, :keywords)
     article = Enum.at(SimilarArticleRetrieval.get_one_article(keywords, value), 0)
     add_article(article["bias"], socket, article)
 
